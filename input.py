@@ -4,6 +4,9 @@ from pygame.locals import *
 def parse_input(key):
 	if key in ['north','northeast','northwest','east','west','south','southeast','southwest']:
 		var.player.direction = key
+	
+	if key == 'z':
+		var.player.shoot()
 
 def get_input():
 	for event in pygame.event.get():
@@ -44,6 +47,8 @@ def get_input():
 				if not var.input['downright']:
 					var.input['downright'] = True
 					var.movedelay = -90
+			elif event.key == K_z:
+				parse_input('z')
 		
 		elif event.type == KEYUP:
 			if event.key == K_UP or event.key == K_KP8:
