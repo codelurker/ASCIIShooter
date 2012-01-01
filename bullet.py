@@ -31,7 +31,7 @@ class straight(bullet):
 		
 		self.direction = direction
 		
-		self.move_speed_max = 2
+		self.move_speed_max = 1
 		
 		self.sprite = 'O'
 		self.color = (255,0,0)

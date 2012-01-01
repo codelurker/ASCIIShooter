@@ -24,4 +24,4 @@ class single_shot(weapon):
 		
 		self.name = 'Single Shot'
 		
-		self.reload_max = 15
+		self.reload_max = 10

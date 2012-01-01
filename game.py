@@ -6,7 +6,8 @@ def init():
 	
 	#Test enemies
 	e1 = ship.fighter(x=15,y=3)
-	e2 = ship.bomber(x=16,y=3)
+	for b in range(0,15):
+		ship.bomber(x=2+b,y=15-b)
 	
 	var.player.add_weapon(weapon.single_shot())
 
@@ -24,3 +25,4 @@ def init():
 			s.draw()
 			
 		var.window.update()
+		var.clock.tick(var.fps)

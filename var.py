@@ -3,7 +3,7 @@ binds = {'up':'north','down':'south','left':'west','right':'east','upleft':'nort
 	'l':'l'}
 
 win_size = (30,30)
-fps = 30
+fps = 60
 movedelay = 1
 movedelay_max = 3
 
