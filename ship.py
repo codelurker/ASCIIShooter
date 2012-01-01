@@ -5,9 +5,15 @@ class ship(general.active):
 		var.ships.append(self)
 		
 		self.pos = [x,y]
-		
-		self.direction = ''
-		self.direction_lock = False
+		self.last_pos = [x,y]
+		self.start_pos = [x,y]
+			
+		if player:
+			self.direction = ''
+			self.direction_lock = False
+		else:
+			self.direction = 'south'
+			self.direction_lock = True
 		
 		self.life = 0
 		self.life_max = 0
@@ -24,13 +30,18 @@ class ship(general.active):
 	def tick(self):
 		general.active.tick(self)
 		
+		if self.life <= 0: self.destroy()
+		
+		self.last_pos = [self.pos[0],self.pos[1]]
+		
 		for wep in self.weapons:
 			wep.tick()
 		
 		for b in var.bullets:
 			if b.owner == self: continue
 			
-			if b.pos == self.pos:
+			if b.pos == self.pos or b.pos == self.last_pos:
+				self.life-=1
 				b.destroy()
 	
 	def shoot(self):
@@ -59,9 +70,15 @@ class bomber(ship):
 	def __init__(self,x=0,y=0,player=False):
 		ship.__init__(self,x=x,y=y,player=player)
 		
-		self.move_speed_max = 6
+		self.move_speed_max = 15
 		self.life = 5
 		self.life_max = 5
 		
 		self.sprite = 'B'
 		self.color = (255,0,0)
+	
+#	def tick(self):
+#		ship.__tick__(self)
+#		
+#		if not player:
+			

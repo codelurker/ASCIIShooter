@@ -15,7 +15,7 @@ class weapon:
 	
 	def fire(self):
 		if not self.reload:
-			bullet.straight(self,'north',x=self.owner.pos[0],y=self.owner.pos[1])
+			bullet.straight(self.owner,'north',x=self.owner.pos[0],y=self.owner.pos[1])
 			self.reload = self.reload_max
 
 class single_shot(weapon):

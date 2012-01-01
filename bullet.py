@@ -7,6 +7,8 @@ class bullet(general.active):
 		self.owner = owner
 		
 		self.pos = [x,y]
+		self.last_pos = [x,y]
+		self.start_pos = [x,y]
 		
 		self.move_speed = 0
 		self.move_speed_max = 0
