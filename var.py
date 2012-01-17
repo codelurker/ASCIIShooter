@@ -9,3 +9,4 @@ movedelay_max = 3
 
 ships = []
 bullets = []
+debris = []

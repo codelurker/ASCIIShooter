@@ -1,4 +1,4 @@
-import general, var
+import general, debris, var
 
 class ship(general.active):
 	def __init__(self,x=0,y=0,player=False):
@@ -52,6 +52,9 @@ class ship(general.active):
 		weapon.owner = self
 	
 	def destroy(self):
+		for dir in ['north','northwest','northeast','east','west','southwest','southeast','south']:
+			debris.debris(dir,x=self.pos[0],y=self.pos[1])
+		
 		var.ships.remove(self)
 
 class fighter(ship):
@@ -59,8 +62,8 @@ class fighter(ship):
 		ship.__init__(self,x=x,y=y,player=player)
 		
 		self.move_speed_max = 3
-		self.life = 3
-		self.life_max = 3
+		self.life = 1
+		self.life_max = 1
 		
 		if player: self.sprite = '^'
 		else: self.sprite = 'v'
@@ -71,8 +74,8 @@ class bomber(ship):
 		ship.__init__(self,x=x,y=y,player=player)
 		
 		self.move_speed_max = 15
-		self.life = 5
-		self.life_max = 5
+		self.life = 3
+		self.life_max = 3
 		
 		self.sprite = 'B'
 		self.color = (255,0,0)

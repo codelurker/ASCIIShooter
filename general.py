@@ -17,6 +17,10 @@ class active:
 		elif self.direction == 'south': self.pos[1]+=1
 		elif self.direction == 'east': self.pos[0]+=1
 		elif self.direction == 'west': self.pos[0]-=1
+		elif self.direction == 'northeast': self.pos[0]+=1;self.pos[1]-=1
+		elif self.direction == 'northwest': self.pos[0]-=1;self.pos[1]-=1
+		elif self.direction == 'southeast': self.pos[0]+=1;self.pos[1]+=1
+		elif self.direction == 'southwest': self.pos[0]-=1;self.pos[1]+=1
 		
 		if not self.direction_lock: self.direction = ''
 	

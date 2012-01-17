@@ -33,5 +33,5 @@ class straight(bullet):
 		
 		self.move_speed_max = 1
 		
-		self.sprite = 'O'
-		self.color = (255,0,0)
+		self.sprite = '|'
+		self.color = (255,0,255)
