@@ -13,9 +13,9 @@ class weapon:
 	def tick(self):
 		if self.reload: self.reload-=1
 	
-	def fire(self):
+	def fire(self,direction):
 		if not self.reload:
-			bullet.straight(self.owner,'north',x=self.owner.pos[0],y=self.owner.pos[1])
+			bullet.straight(self.owner,direction,x=self.owner.pos[0],y=self.owner.pos[1])
 			self.reload = self.reload_max
 
 class single_shot(weapon):
@@ -25,3 +25,11 @@ class single_shot(weapon):
 		self.name = 'Single Shot'
 		
 		self.reload_max = 10
+
+class single_shot_slow(weapon):
+	def __init__(self):
+		weapon.__init__(self)
+		
+		self.name = 'Single Shot'
+		
+		self.reload_max = 30

@@ -6,7 +6,7 @@ def parse_input(key):
 		var.player.direction = key
 	
 	if key == 'z':
-		var.player.shoot()
+		var.player.shoot('north')
 
 def get_input():
 	for event in pygame.event.get():

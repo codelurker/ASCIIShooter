@@ -1,4 +1,4 @@
-import ship, random, var
+import ship, debris, var, random
 
 class spawner:
 	def __init__(self):
@@ -24,3 +24,12 @@ class spawner:
 		
 		if len(var.ships)<5 and len(self.schedule)<5:
 			self.add('single:fighter')
+			
+class star_spawner():
+	def __init__(self):
+		self.tick_max = 3
+		self.ticks = 0
+	
+	def tick(self):
+		if not self.ticks: debris.star();self.ticks=self.tick_max
+		else: self.ticks-=1

@@ -6,6 +6,11 @@ win_size = (30,30)
 fps = 60
 movedelay = 1
 movedelay_max = 3
+cleaning = False
+
+pause = False
+score = 0
+lives = 3
 
 ships = []
 bullets = []
