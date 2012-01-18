@@ -1,4 +1,4 @@
-import general, weapon, debris, var, random
+import general, weapon, debris, sound, var, random
 
 class ship(general.active):
 	def __init__(self,x=0,y=0,player=False):
@@ -36,7 +36,7 @@ class ship(general.active):
 		
 		general.active.tick(self)
 		
-		if self.life <= 0: self.destroy()
+		if self.life <= 0: sound.play_sound(var.snd_explode1);self.destroy()
 		
 		self.last_pos = [self.pos[0],self.pos[1]]
 		
@@ -76,14 +76,12 @@ class fighter(ship):
 		
 		self.score = 10
 		
-		if player: self.sprite = '^'
-		else: self.sprite = 'v'
+		if player: self.sprite = '^';self.add_weapon(weapon.single_shot())
+		else: self.sprite = 'v';self.add_weapon(weapon.single_shot_slow())
 		self.color = (0,255,0)
 		
 		self.y_limit = random.randint(10,20)
 		
-		self.add_weapon(weapon.single_shot_slow())
-	
 	def tick(self):
 		if not self.move_speed and not self.player:
 			if self.pos[1] == self.y_limit and self.direction == 'south':

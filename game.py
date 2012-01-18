@@ -1,4 +1,4 @@
-import input, logic, ship, weapon, debris, var
+import input, logic, ship, weapon, debris, sound, var
 
 def init():
 	#Make player
@@ -7,6 +7,8 @@ def init():
 	
 	ship_spawner = logic.spawner()
 	star_spawner = logic.star_spawner()
+	
+	sound.play_song('endofstory.mod')
 
 	#Game loop
 	while 1:
@@ -38,6 +40,8 @@ def init():
 				var.window.putchars('YOU ARE DEAD',fgcolor=(255,255,255),x=9,y=15)
 		elif not var.player in var.ships and var.lives and not var.cleaning:
 			var.cleaning = True
+			
+			sound.stop_song()
 			
 			for d in var.debris:
 				if d.owner==var.player: continue
