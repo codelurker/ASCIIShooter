@@ -62,7 +62,7 @@ class ship(general.active):
 		for dir in ['north','northwest','northeast','east','west','southwest','southeast','south']:
 			debris.debris(dir,x=self.pos[0],y=self.pos[1],owner=self)
 		
-		if not self.player: var.score+=self.score
+		if not self.player and not var.cleaning: var.score+=self.score
 		
 		var.ships.remove(self)
 
