@@ -1,4 +1,4 @@
-import general, weapon, debris, sound, var, random
+import general, weapon, debris, sound, var, shapes, random
 
 class ship(general.active):
 	def __init__(self,x=0,y=0,player=False):
@@ -17,6 +17,8 @@ class ship(general.active):
 		
 		self.player = player
 		
+		self.y_limit = -100
+		
 		self.life = 0
 		self.life_max = 0
 		
@@ -30,9 +32,12 @@ class ship(general.active):
 		self.color = (0,0,0)
 	
 	def tick(self):
-		if not self.move_speed:
+		if not self.move_speed and not var.cleaning and not self.player:
 			if self.pos[0]<=0: self.direction = 'east';self.pos[1]+=1
 			elif self.pos[0]>=var.win_size[0]-1: self.direction = 'west';self.pos[1]+=1
+		elif not self.move_speed and self.player:
+			if self.pos[0]<=0: self.pos[0]=1
+			elif self.pos[0]>=var.win_size[0]-1: self.pos[0]=var.win_size[0]-2
 		
 		general.active.tick(self)
 		
@@ -80,8 +85,6 @@ class fighter(ship):
 		else: self.sprite = 'v';self.add_weapon(weapon.single_shot_slow())
 		self.color = (0,255,0)
 		
-		self.y_limit = random.randint(10,20)
-		
 	def tick(self):
 		if not self.move_speed and not self.player:
 			if self.pos[1] == self.y_limit and self.direction == 'south':
@@ -94,10 +97,38 @@ class bomber(ship):
 		ship.__init__(self,x=x,y=y,player=player)
 		
 		self.move_speed_max = 15
-		self.life = 3
-		self.life_max = 3
+		self.life = 2
+		self.life_max = 2
 		
 		self.score = 20
 		
 		self.sprite = 'B'
 		self.color = (255,0,0)
+	
+	def destroy(self):
+		ship.destroy(self)
+		
+		_c = shapes.draw_circle(self.pos,10)
+		
+		if self.life<=0:
+			for _s in var.ships:
+				for pos in _c:
+					pos = list(pos)
+					if _s.pos == pos:
+						_s.life = 0
+			
+			for pos in _c:
+				debris.debris('',x=pos[0],y=pos[1],owner=self)
+
+class rock(ship):
+	def __init__(self,x=0,y=0,player=False):
+		ship.__init__(self,x=x,y=y,player=player)
+		
+		self.move_speed_max = 3
+		self.life = 1
+		self.life_max = 1
+		
+		self.score = 5
+		
+		self.sprite = 'o'
+		self.color = (105,105,105)

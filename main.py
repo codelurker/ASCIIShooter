@@ -1,10 +1,10 @@
-import pygcurse, pygame, game, var
+import pygcurse, pygame, game, sound, var
 from pygame.locals import *
 
 pygame.font.init()
 pygame.mixer.init()
 
-var.snd_explode1 = pygame.mixer.Sound('explode1.wav');var.snd_explode1.set_volume(0.3)
+var.snd_explode1 = sound.load_sound('explode1.wav')
 
 _font = pygame.font.Font('ProggySquare.ttf', 24)
 
