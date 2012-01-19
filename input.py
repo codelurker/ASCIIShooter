@@ -7,6 +7,10 @@ def parse_input(key):
 	
 	if key == 'z':
 		var.player.shoot('north')
+	
+	if key == 'p':
+		if var.pause: var.pause = False
+		else: var.pause = True
 
 def get_input():
 	for event in pygame.event.get():
@@ -49,6 +53,8 @@ def get_input():
 					var.movedelay = -90
 			elif event.key == K_z:
 				parse_input('z')
+			elif event.key == K_p:
+				parse_input('p')
 		
 		elif event.type == KEYUP:
 			if event.key == K_UP or event.key == K_KP8:

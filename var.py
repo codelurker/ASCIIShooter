@@ -11,7 +11,7 @@ cleaning = False
 pause = False
 score = 0
 lives = 3
-difficulty = 50
+difficulty = 75
 
 sound_volume = 0
 music_volume = 0

@@ -50,7 +50,7 @@ def init():
 				d.move_speed = 0
 			
 			for s in var.ships:
-				s.move_speed_max = s.move_speed_max/2
+				s.move_speed_max = 1#s.move_speed_max/2
 				s.move_speed = 0
 				s.direction = 'south'
 				s.y_limit = var.win_size[1]+1
@@ -64,6 +64,8 @@ def init():
 				
 				var.lives-=1
 				var.cleaning = False
+		elif var.pause and var.player in var.ships:
+			var.window.putchars('PAUSED',fgcolor=(255,255,255),x=12,y=15)
 		
 		var.window.putchars('Score %s' % (var.score),fgcolor=(255,255,255),x=0,y=0)
 		var.window.putchars('Lives %s' % (var.lives),fgcolor=(255,255,255),x=23,y=0)

@@ -27,15 +27,15 @@ class spawner:
 		_s = None
 		
 		if action[0]=='single':
-			if action[1]=='fighter': _s = ship.fighter(x=random.randint(0,var.win_size[1]),y=0)
-			elif action[1]=='bomber': _s = ship.bomber(x=random.randint(0,var.win_size[1]),y=0)
-			elif action[1]=='rock': _s = ship.rock(x=random.randint(0,var.win_size[1]),y=0)
+			if action[1]=='fighter': _s = ship.fighter(x=random.randint(1,var.win_size[1]-1),y=0)
+			elif action[1]=='bomber': _s = ship.bomber(x=random.randint(1,var.win_size[1]-1),y=0)
+			elif action[1]=='rock': _s = ship.rock(x=random.randint(0,var.win_size[1]-1),y=0)
 			
 			if _s and action[1]=='fighter': _s.y_limit = random.randint(5,5+(var.score/var.difficulty))
 			
 		elif action[0]=='wave':
 			action[2] = int(action[2])
-			x_spawn = random.randint(0,var.win_size[0]-action[2])
+			x_spawn = random.randint(1,(var.win_size[0]-1)-action[2])
 			
 			for n in range(action[2]):
 				if action[1]=='fighter': _s=ship.fighter(x=x_spawn+n,y=0)
