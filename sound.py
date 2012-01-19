@@ -17,7 +17,7 @@ def stop_song(fade=0):
 	else: pygame.mixer.music.stop()
 
 def load_sound(file):
-	_s = pygame.mixer.Sound('explode1.wav');
+	_s = pygame.mixer.Sound(file);
 	_s.set_volume(var.sound_volume)
 	
 	return _s

@@ -41,6 +41,7 @@ def init():
 				if d.owner==var.player: _count+=1
 			
 			if not _count:
+				sound.pause_song()
 				var.window.putchars('YOU ARE DEAD',fgcolor=(255,255,255),x=9,y=15)
 		elif var.state=='game' and not var.player in var.ships and var.lives and not var.cleaning:
 			var.cleaning = True
@@ -59,7 +60,7 @@ def init():
 				s.direction = 'south'
 				s.y_limit = var.win_size[1]+1
 		elif var.state=='menu':
-			_r = random.randint(-55,0)
+			_r = random.randint(-100,0)
 			var.window.putchars('ASCII SHOOTER',fgcolor=(255+_r,255+_r,255+_r),x=9,y=13-(len(var.main_menu)/2))
 			for entry in var.main_menu:
 				_i = var.main_menu.index(entry)
