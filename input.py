@@ -1,16 +1,25 @@
-import pygame, time, var, sys
+import pygame, time, game, var, sys
 from pygame.locals import *
 
 def parse_input(key):
-	if key in ['north','northeast','northwest','east','west','south','southeast','southwest']:
-		var.player.direction = key
-	
-	if key == 'z':
-		var.player.shoot('north')
-	
-	if key == 'p':
-		if var.pause: var.pause = False
-		else: var.pause = True
+	if var.state == 'game':
+		if key in ['north','northeast','northwest','east','west','south','southeast','southwest']:
+			var.player.direction = key
+		
+		if key == 'z':
+			var.player.shoot('north')
+		
+		if key == 'p':
+			if var.pause: var.pause = False
+			else: var.pause = True
+	elif var.state == 'menu':
+		if key == 'south' and var.menu_select<len(var.main_menu)-1:
+			var.menu_select+=1
+		elif key == 'north' and var.menu_select>0:
+			var.menu_select-=1
+		elif key == 'enter' and var.state=='menu':
+			var.state = var.main_menu[var.menu_select]['action']
+			game.setup()
 
 def get_input():
 	for event in pygame.event.get():
@@ -52,9 +61,13 @@ def get_input():
 					var.input['downright'] = True
 					var.movedelay = -90
 			elif event.key == K_z:
-				parse_input('z')
+				if not var.input['z']:
+					var.input['z'] = True
+					#parse_input('z')
 			elif event.key == K_p:
 				parse_input('p')
+			elif event.key == K_RETURN:
+				parse_input('enter')
 		
 		elif event.type == KEYUP:
 			if event.key == K_UP or event.key == K_KP8:
@@ -73,6 +86,8 @@ def get_input():
 				var.input['downleft'] = False
 			elif event.key == K_KP3:
 				var.input['downright'] = False
+			elif event.key == K_z:
+				var.input['z'] = False
 	
 	_draw = False
 	for key in var.input.iterkeys():

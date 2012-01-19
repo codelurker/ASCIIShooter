@@ -6,6 +6,12 @@ def play_song(song):
 	pygame.mixer.music.set_volume(var.music_volume)
 	pygame.mixer.music.play()
 
+def pause_song():
+	pygame.mixer.music.pause()
+
+def unpause_song():
+	pygame.mixer.music.unpause()
+
 def stop_song(fade=0):
 	if fade: pygame.mixer.music.fadeout(fade)
 	else: pygame.mixer.music.stop()
